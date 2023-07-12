@@ -137,14 +137,14 @@
       "id": 22,
       "price": "163",
       "name": "Vegetable Wreath with Feta Cheese and Sour Cream 300 g",
-      "category": "all-day_breakfast"
+      "category": "salads"
     },
     {
       "id": 23,
       "price": "315",
       "name": "Prosciutto Salad 180 g",
       "description": "Prosciutto, arugula, Dor Blue cheese, and cashews",
-      "category": "all-day_breakfast"
+      "category": "salads"
     },
     {
       "id": 24,
