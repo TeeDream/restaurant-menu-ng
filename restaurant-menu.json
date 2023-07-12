@@ -1,0 +1,555 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "price": "198",
+      "name": "Salmon Bruschetta 185 g",
+      "description": "with avocado and cream cheese spread, sundried tomatoes, and arugula",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 2,
+      "price": "98",
+      "name": "Oatmeal with Caramelized Pear and Walnut 300 g",
+      "description": "prepared with milk or water",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 3,
+      "price": "168",
+      "name": "Cheese and Tomato Omelette 265 g",
+      "description": "served with toast and butter",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 4,
+      "price": "146",
+      "name": "Bacon and Scrambled Eggs 160 g",
+      "description": "served with toast and butter",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 5,
+      "price": "135",
+      "name": "Cottage Cheese Pancakes with Sour Cream 150/50 g",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 6,
+      "price": "85",
+      "name": "Pancakes with Sauce of Your Choice 140 g",
+      "description": "Nutella, sour cream, or berry sauce of your choice",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 7,
+      "price": "110",
+      "name": "Herring with Potatoes 100/90 g",
+      "category": "cold_appetizers"
+    },
+    {
+      "id": 8,
+      "price": "285",
+      "name": "Salted Salmon 100 g",
+      "category": "cold_appetizers"
+    },
+    {
+      "id": 9,
+      "price": "130",
+      "name": "Jellied Pork",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 10,
+      "price": "185",
+      "name": "Veal Tongue",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 11,
+      "price": "115",
+      "name": "Chicken Roll",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 12,
+      "price": "136",
+      "name": "Homemade Liver Pate 100/80 g",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 13,
+      "price": "168",
+      "name": "Generous Bacon 100/40 g",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 14,
+      "price": "365",
+      "name": "Cheese Platter 150/100 g",
+      "description": "(Parmesan, Dor Blue, Camembert)",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 15,
+      "price": "295",
+      "name": "Beer Plate 310 g",
+      "description": "basturma, lavash fries, smoked cheese, chicken strips (spicy), fried hearts. Garlic sauce",
+      "category": "homemade_meat_delicacies"
+    },
+    {
+      "id": 16,
+      "price": "45",
+      "name": "Pickles",
+      "category": "ukrainian_pickles"
+    },
+    {
+      "id": 17,
+      "price": "50",
+      "name": "Tomatoes",
+      "category": "ukrainian_pickles"
+    },
+    {
+      "id": 18,
+      "price": "45",
+      "name": "Sauerkraut",
+      "category": "ukrainian_pickles"
+    },
+    {
+      "id": 19,
+      "price": "85",
+      "name": "Marinated Porcini Mushrooms",
+      "category": "ukrainian_pickles"
+    },
+    {
+      "id": 20,
+      "price": "65",
+      "name": "Marinated Plums",
+      "category": "ukrainian_pickles"
+    },
+    {
+      "id": 21,
+      "price": "85",
+      "name": "Marinated Garlic",
+      "category": "ukrainian_pickles"
+    },
+    {
+      "id": 22,
+      "price": "163",
+      "name": "Vegetable Wreath with Feta Cheese and Sour Cream 300 g",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 23,
+      "price": "315",
+      "name": "Prosciutto Salad 180 g",
+      "description": "Prosciutto, arugula, Dor Blue cheese, and cashews",
+      "category": "all-day_breakfast"
+    },
+    {
+      "id": 24,
+      "price": "165",
+      "name": "Greek Salad 265 g",
+      "category": "salads"
+    },
+    {
+      "id": 25,
+      "price": "298",
+      "name": "Salmon Salad 200 g",
+      "category": "salads"
+    },
+    {
+      "id": 26,
+      "price": "385",
+      "name": "Shrimp Salad 190 g",
+      "category": "salads"
+    },
+    {
+      "id": 27,
+      "price": "196",
+      "name": "Turkey Salad with Cashews and Blue Cheese 180 g",
+      "category": "salads"
+    },
+    {
+      "id": 28,
+      "price": "196",
+      "name": "Caesar Salad with Chicken 280 g",
+      "category": "salads"
+    },
+    {
+      "id": 29,
+      "price": "165",
+      "name": "Olivier Salad with Veal Tongue 260 g",
+      "category": "salads"
+    },
+    {
+      "id": 30,
+      "price": "245",
+      "name": "Warm Salad with Veal and Vegetables 240 g",
+      "category": "salads"
+    },
+    {
+      "id": 31,
+      "price": "110",
+      "name": "Okroshka with Ayran 300 g",
+      "category": "soups"
+    },
+    {
+      "id": 32,
+      "price": "156",
+      "name": "Creamy Mushroom Soup with Champignons 300 g",
+      "category": "soups"
+    },
+    {
+      "id": 33,
+      "price": "156",
+      "name": "Ukrainian Borscht with Dumplings 350/130 g",
+      "category": "soups"
+    },
+    {
+      "id": 34,
+      "price": "160",
+      "name": "Mixed Meat Solyanka 300 g",
+      "category": "soups"
+    },
+    {
+      "id": 35,
+      "price": "265",
+      "name": "Fish Broth 300 g",
+      "category": "soups"
+    },
+    {
+      "id": 36,
+      "price": "156",
+      "name": "Creamy Broccoli Soup 250/15 g",
+      "category": "soups"
+    },
+    {
+      "id": 37,
+      "price": "118",
+      "name": "Chicken Broth with Homemade Noodles 300 g",
+      "category": "soups"
+    },
+    {
+      "id": 38,
+      "price": "125",
+      "name": "Chicken Julienne in Pancakes 180/15 g",
+      "category": "hot_appetizers"
+    },
+    {
+      "id": 39,
+      "price": "145",
+      "name": "Cabbage Rolls 200/60 g",
+      "category": "hot_appetizers"
+    },
+    {
+      "id": 40,
+      "price": "130",
+      "name": "Homemade Sausage",
+      "category": "hot_appetizers"
+    },
+    {
+      "id": 41,
+      "price": "126",
+      "name": "with Sour Cream 300/50 g",
+      "category": "traditional_deruny"
+    },
+    {
+      "id": 42,
+      "price": "138",
+      "name": "with Mushrooms 300/80 g",
+      "category": "traditional_deruny"
+    },
+    {
+      "id": 43,
+      "price": "129",
+      "name": "Meat Dumplings 250/20 g",
+      "category": "dumplings"
+    },
+    {
+      "id": 44,
+      "price": "116",
+      "name": "Potato and Mushroom Dumplings 250/40 g",
+      "category": "dumplings"
+    },
+    {
+      "id": 45,
+      "price": "136",
+      "name": "Cheese Dumplings 250/20 g",
+      "category": "dumplings"
+    },
+    {
+      "id": 46,
+      "price": "135",
+      "name": "Berry Dumplings 250/100 g",
+      "category": "dumplings"
+    },
+    {
+      "id": 47,
+      "price": "368",
+      "name": "Duck Leg with Drunken Pear 260 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 48,
+      "price": "286",
+      "name": "Turkey Stuffed with Cheese and Spinach 270/70 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 49,
+      "price": "456",
+      "name": "Duck Breast with Asparagus and Cherry Tomatoes 280 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 50,
+      "price": "298",
+      "name": "Veal with Cherry 310 g",
+      "description": "Served with cheese balls and mixed salad",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 51,
+      "price": "168",
+      "name": "Homemade Turkey Cutlets with Broccoli 160/30 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 52,
+      "price": "236",
+      "name": "Chicken Kiev Cutlet 150/85 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 53,
+      "price": "296",
+      "name": "Taras's Signature Ribs 300/100/50 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 54,
+      "price": "298",
+      "name": "Veal, Turkey, and Veal Liver in Creamy Mushroom Sauce 300 g",
+      "category": "meat_dishes"
+    },
+    {
+      "id": 55,
+      "price": "225",
+      "name": "Fried Sweet Carps 200/30 g",
+      "category": "fish_dishes"
+    },
+    {
+      "id": 56,
+      "price": "468",
+      "name": "Sea Bass Fillet with Vegetables 120/150 g",
+      "category": "fish_dishes"
+    },
+    {
+      "id": 57,
+      "price": "265",
+      "name": "Homemade Pike Cutlets with Mushroom Sauce 160/110 g",
+      "category": "fish_dishes"
+    },
+    {
+      "id": 58,
+      "price": "396",
+      "name": "Baked Dorado with Cherry Tomatoes and Pesto Sauce 300 g",
+      "category": "fish_dishes"
+    },
+    {
+      "id": 59,
+      "price": "145",
+      "name": "Banoshe 150/20/20",
+      "category": "side_dishes"
+    },
+    {
+      "id": 60,
+      "price": "55",
+      "name": "Boiled Potatoes 150 g",
+      "category": "side_dishes"
+    },
+    {
+      "id": 61,
+      "price": "55",
+      "name": "Homemade Fried Potatoes 150 g",
+      "category": "side_dishes"
+    },
+    {
+      "id": 62,
+      "price": "65",
+      "name": "French Fries 150 g",
+      "category": "side_dishes"
+    },
+    {
+      "id": 63,
+      "price": "55",
+      "name": "Country-Style Potatoes 150 g",
+      "category": "side_dishes"
+    },
+    {
+      "id": 64,
+      "price": "55",
+      "name": "Young Boiled Potatoes 150 g",
+      "category": "side_dishes"
+    },
+    {
+      "id": 65,
+      "price": "65",
+      "name": "Buckwheat Porridge with Mushrooms 150 g",
+      "category": "side_dishes"
+    },
+    {
+      "id": 66,
+      "price": "198",
+      "name": "Grilled Vegetables 300 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 67,
+      "price": "146",
+      "name": "Lavash with Suluguni Cheese and Greens 225 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 68,
+      "price": "195",
+      "name": "Veal Chops 100 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 69,
+      "price": "165",
+      "name": "Dorado 100 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 70,
+      "price": "196",
+      "name": "Carpathian Trout 100 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 71,
+      "price": "137",
+      "name": "Mackerel 100 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 72,
+      "price": "280",
+      "name": "Salmon 100 g",
+      "category": "open_fire_dishes"
+    },
+    {
+      "id": 73,
+      "price": "119",
+      "name": "Chicken Shashlik",
+      "category": "shashlik"
+    },
+    {
+      "id": 74,
+      "price": "143",
+      "name": "Pork Neck Shashlik",
+      "category": "shashlik"
+    },
+    {
+      "id": 75,
+      "price": "169",
+      "name": "Veal Shashlik",
+      "category": "shashlik"
+    },
+    {
+      "id": 76,
+      "price": "87",
+      "name": "Pork and Veal Lyulya-Kebab",
+      "category": "lyulya-kebab"
+    },
+    {
+      "id": 77,
+      "price": "46",
+      "name": "Adjika Sauce 50 g",
+      "category": "sauces"
+    },
+    {
+      "id": 78,
+      "price": "46",
+      "name": "Barbecue Sauce 50 g",
+      "category": "sauces"
+    },
+    {
+      "id": 79,
+      "price": "46",
+      "name": "Tkemali Sauce 50 g",
+      "category": "sauces"
+    },
+    {
+      "id": 80,
+      "price": "46",
+      "name": "Sour Cream and Lemon Sauce 50 g",
+      "category": "sauces"
+    },
+    {
+      "id": 81,
+      "price": "20",
+      "name": "Bread 100 g",
+      "category": "bread_basket"
+    },
+    {
+      "id": 82,
+      "price": "15",
+      "name": "Thin Lavash 60 g",
+      "category": "bread_basket"
+    },
+    {
+      "id": 83,
+      "price": "98",
+      "name": "Berry Cheesecake 100 g",
+      "category": "dessert"
+    },
+    {
+      "id": 84,
+      "price": "129",
+      "name": "Baked Pancakes with Homemade Cheese and Raisins in a Pot 140/20/50 g",
+      "category": "dessert"
+    },
+    {
+      "id": 85,
+      "price": "126",
+      "name": "Poppy Seed Pancakes 140/50 g",
+      "category": "dessert"
+    },
+    {
+      "id": 86,
+      "price": "198",
+      "name": "Pear Tart with Ice Cream 300/50 g",
+      "category": "dessert"
+    },
+    {
+      "id": 87,
+      "price": "98",
+      "name": "Napoleon Cake",
+      "description": "price per 100 g",
+      "category": "dessert"
+    },
+    {
+      "id": 88,
+      "price": "106",
+      "name": "Medovik Cake",
+      "description": "price per 100 g",
+      "category": "dessert"
+    },
+    {
+      "id": 89,
+      "price": "60",
+      "name": "Ice Cream, Sorbet 100 g",
+      "category": "dessert"
+    },
+    {
+      "id": 90,
+      "price": "135",
+      "name": "Cottage Cheese Pancakes with Sour Cream 150/50 g",
+      "category": "dessert"
+    }
+  ]
+}
