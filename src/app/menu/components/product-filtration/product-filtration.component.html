@@ -1,0 +1,8 @@
+<h4>Select categories:</h4>
+<section class="example-section" [formGroup]="formCategories">
+  <p *ngFor="let category of categories">
+    <mat-checkbox [formControlName]="category">{{
+      category | uppercase
+    }}</mat-checkbox>
+  </p>
+</section>

@@ -21,7 +21,7 @@ export class DataService {
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+    return (error: Error): Observable<T> => {
       console.error(operation, error);
 
       return of(result as T);
