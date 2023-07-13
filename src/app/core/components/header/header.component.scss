@@ -1,5 +1,13 @@
-header {
-  display: flex;
-  justify-content: space-between;
+.header {
   padding: 15px 0;
+  display: flex;
+  justify-content: flex-end;
+
+  mat-nav-list.list-horizontal {
+    display: flex;
+
+    mat-list-item {
+      min-width: fit-content;
+    }
+  }
 }
