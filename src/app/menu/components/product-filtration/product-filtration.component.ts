@@ -1,14 +1,12 @@
-import { CommonModule, JsonPipe } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { Observable, filter, map, tap } from 'rxjs';
-import { DataService } from 'src/app/core/services/data.service';
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Subject, debounceTime, map, takeUntil } from 'rxjs';
 import {
   FILTER_CATEGORIES,
   filterCategories,
@@ -22,45 +20,46 @@ type BuilderFormCategory = {
   selector: 'app-product-filtration',
   templateUrl: './product-filtration.component.html',
   styleUrls: ['./product-filtration.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    MatCheckboxModule,
-    JsonPipe,
-    CommonModule,
-    // MaterialModule
-  ],
 })
-export class ProductFiltrationComponent implements OnInit {
-  constructor(private fb: FormBuilder, private dataService: DataService) {}
+export class ProductFiltrationComponent implements OnInit, OnDestroy {
+  constructor(private fb: FormBuilder) {}
 
-  categories$!: Observable<string>;
-  categories = [...FILTER_CATEGORIES];
-  formCategories = this.fb.group(this.createFormCategory());
-  test = new FormControl('');
+  @Output() productFilters = new EventEmitter<string[]>();
 
-  createFormCategory() {
+  private destroy$ = new Subject<void>();
+  public categories = [...FILTER_CATEGORIES];
+  public formCategories = this.fb.group(this.createFormCategory());
+
+  protected createFormCategory() {
     return this.categories.reduce((acc, category) => {
       acc[category] = false;
       return acc;
     }, {} as BuilderFormCategory);
   }
 
+  //TODO: FormControl?
+
+  public sanitizeCategory(category: string): string {
+    return category.replaceAll(/[_-]/g, ' ');
+  }
+
   ngOnInit(): void {
-    this.test.valueChanges.subscribe((data) => console.log(data));
     this.formCategories.valueChanges
       .pipe(
-        tap((data) => console.log(data)),
+        debounceTime(300),
         map((data) =>
           Object.entries(data)
             .filter((data) => data[1])
             .map((term) => term[0])
-            .join(' ')
-        )
+        ),
+        takeUntil(this.destroy$)
       )
       .subscribe((data) => {
-        this.dataService.term$.next(data);
+        this.productFilters.emit(data);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 }

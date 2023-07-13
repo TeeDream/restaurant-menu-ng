@@ -1,10 +1,8 @@
 <h4>Select categories:</h4>
 <section class="example-section" [formGroup]="formCategories">
   <p *ngFor="let category of categories">
-    <!-- [formControlName]="category" -->
-    <mat-checkbox [formControl]="test">{{ category | uppercase }}</mat-checkbox>
+    <mat-checkbox [formControlName]="category">{{
+      sanitizeCategory(category) | uppercase
+    }}</mat-checkbox>
   </p>
 </section>
-
-<!-- [(ngModel)]="" -->
-<!-- (change)="toggle($event.source.id)" -->

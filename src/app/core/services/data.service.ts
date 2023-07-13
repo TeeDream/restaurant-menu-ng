@@ -1,15 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  catchError,
-  of,
-  retry,
-  take,
-  tap,
-} from 'rxjs';
+import { Observable, catchError, of, retry, take } from 'rxjs';
 import { IProduct } from '../types/product.interface';
 
 @Injectable({
@@ -18,24 +9,26 @@ import { IProduct } from '../types/product.interface';
 export class DataService {
   constructor(private http: HttpClient) {}
 
-  private productsUrl = 'http://localhost:3000/products';
-  // term$ = new Subject<string>();
-  term$ = new BehaviorSubject<string>('');
-  // check group click => from control array
+  private readonly productsUrl = 'http://localhost:3000/products';
 
-  getProducts(filter: string): Observable<IProduct[]> {
+  public getProducts(filter: string[]): Observable<IProduct[]> {
+    if (!filter.length || filter[0] !== 'all') return of([]);
+
     return this.http
       .get<IProduct[]>(this.productsUrl, {
         params: {
-          category: filter ? filter.split(' ') : [],
+          category: filter,
         },
       })
       .pipe(
-        tap((data) => console.log(data)),
         take(1),
         retry(1),
         catchError(this.handleError<IProduct[]>('getProducts', []))
       );
+  }
+
+  public productsByFilter(arr: string[]): Observable<IProduct[]> {
+    return this.getProducts(arr);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

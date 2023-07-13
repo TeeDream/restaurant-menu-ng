@@ -1,0 +1,8 @@
+<app-product-search></app-product-search>
+<app-product-filtration
+  (productFilters)="filtersHandler($event)"
+></app-product-filtration>
+<app-product-item
+  *ngFor="let product of products$ | async; trackBy: trackByFn"
+  [product]="product"
+></app-product-item>
