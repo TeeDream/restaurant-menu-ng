@@ -12,7 +12,7 @@ export class DataService {
   private readonly productsUrl = 'http://localhost:3000/products';
 
   public getProducts(filter: string[]): Observable<IProduct[]> {
-    if (!filter.length || filter[0] !== 'all') return of([]);
+    if (!filter.length) return of([]);
 
     return this.http
       .get<IProduct[]>(this.productsUrl, {
