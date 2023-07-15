@@ -1,8 +1,30 @@
-<app-product-search></app-product-search>
-<app-product-filtration
-  (productFilters)="filtersHandler($event)"
-></app-product-filtration>
-<app-product-item
-  *ngFor="let product of products$ | async; trackBy: trackByFn"
-  [product]="product"
-></app-product-item>
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="over">
+    <app-product-filtration
+      (productFilters)="filtersHandler($event)"
+    ></app-product-filtration>
+    <div class="clear-filters">
+      <button mat-raised-button class="clear-filters__btn">
+        Clear Filters
+      </button>
+    </div>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <div class="search-filter-wrapper">
+      <div class="spacer"></div>
+      <div class="search-filter">
+      <app-product-search (filter)="filterHandler($event)"></app-product-search>
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+      </div>
+      <div class="spacer"></div>
+    </div>
+    <div class="product-wrapper">
+      <app-product-item
+        *ngFor="let product of products$ | async;"
+        [product]="product"
+      ></app-product-item>
+    </div>
+  </div>
+</mat-drawer-container>

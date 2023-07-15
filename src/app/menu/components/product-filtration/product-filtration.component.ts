@@ -13,7 +13,7 @@ import {
 } from 'src/app/shared/constants/filterCategory';
 
 type BuilderFormCategory = {
-  [K in (typeof FILTER_CATEGORIES)[keyof filterCategories]]: boolean;
+  [K in typeof FILTER_CATEGORIES[keyof filterCategories]]: boolean;
 };
 
 @Component({
@@ -61,5 +61,6 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroy$.next();
+    this.destroy$.complete();
   }
 }

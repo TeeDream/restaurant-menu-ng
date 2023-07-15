@@ -1,5 +1,5 @@
-<h4>Select categories:</h4>
-<section class="example-section" [formGroup]="formCategories">
+<section class="filter-section" [formGroup]="formCategories">
+  <h2>Select categories:</h2>
   <p *ngFor="let category of categories">
     <mat-checkbox [formControlName]="category">{{
       sanitizeCategory(category) | uppercase

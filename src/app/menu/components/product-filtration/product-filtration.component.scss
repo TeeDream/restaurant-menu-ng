@@ -1,7 +1,11 @@
-.example-section {
+.filter-section {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   padding: 5px;
+
+  h2 {
+    text-align: center;
+  }
 
   p {
     padding: 0 5px;

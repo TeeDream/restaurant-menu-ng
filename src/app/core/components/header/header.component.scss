@@ -1,13 +1,25 @@
 .header {
-  padding: 15px 0;
-  display: flex;
-  justify-content: flex-end;
+  position: relative;
 
-  mat-nav-list.list-horizontal {
+  .toolbar__spacer {
+    flex: 1 1 auto;
+  }
+
+  .logo-wrapper {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+  }
 
-    mat-list-item {
-      min-width: fit-content;
-    }
+  mat-toolbar {
+    display: flex;
+    height: 5rem;
+    background-color: #ffedd5;
+  }
+
+  .toolbar__menu-button {
+    position: absolute;
+    right: 16px;
   }
 }

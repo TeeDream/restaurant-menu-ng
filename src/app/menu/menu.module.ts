@@ -8,6 +8,7 @@ import { MaterialModule } from '../shared/material.module';
 import { MenuPageComponent } from './pages/menu-page/menu-page.component';
 import { CreateComponent } from './dialogs/create/create.component';
 import { ModifyComponent } from './dialogs/modify/modify.component';
+import { MenuDialogComponent } from './dialogs/menu-dialog/menu-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ModifyComponent } from './dialogs/modify/modify.component';
     ProductSearchComponent,
     CreateComponent,
     ModifyComponent,
+    MenuDialogComponent,
   ],
   imports: [CommonModule, SharedModule, MaterialModule],
   exports: [ProductItemComponent, ProductFiltrationComponent],

@@ -1,16 +1,38 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-product-search',
   templateUrl: './product-search.component.html',
   styleUrls: ['./product-search.component.scss'],
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule],
 })
-export class ProductSearchComponent {
-  @Output() filter = new EventEmitter<string>();
+export class ProductSearchComponent implements OnInit, OnDestroy {
+  @Output() filter: EventEmitter<string> = new EventEmitter<string>();
+  destroy$: Subject<void> = new Subject<void>();
+  searchInput = new FormControl('');
+
+  clearInputValue(): void {
+    this.searchInput.setValue('');
+  }
+
+  ngOnInit(): void {
+    this.searchInput.valueChanges
+      .pipe(debounceTime(300), takeUntil(this.destroy$))
+      .subscribe((str) => {
+        if (str === null) return;
+
+        this.filter.emit(str);
+      });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

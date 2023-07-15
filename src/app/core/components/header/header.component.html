@@ -1,6 +1,29 @@
 <header class="header">
-  <mat-nav-list class="list-horizontal">
-    <mat-list-item routerLink="/">Main</mat-list-item>
-    <mat-list-item routerLink="/menu">Menu</mat-list-item>
-  </mat-nav-list>
+  <mat-toolbar>
+    <span class="toolbar__spacer"></span>
+    <div class="logo-wrapper">
+      <span>Restaurant App</span>
+      <app-logo-svg></app-logo-svg>
+    </div>
+    <span class="toolbar__spacer"></span>
+
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+      class="toolbar__menu-button"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="navigation-menu">
+      <a routerLink="/" mat-menu-item>
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+      <a routerLink="/menu" mat-menu-item>
+        <mat-icon>restaurant_menu</mat-icon>
+        <span>Menu</span>
+      </a>
+    </mat-menu>
+  </mat-toolbar>
 </header>
