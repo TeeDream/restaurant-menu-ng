@@ -551,5 +551,25 @@
       "name": "Cottage Cheese Pancakes with Sour Cream 150/50 g",
       "category": "dessert"
     }
+  ],
+  "categories": [
+    { "id": 1, "name": "all day breakfast" },
+    { "id": 2, "name": "cold_appetizers" },
+    { "id": 3, "name": "homemade meat delicacies" },
+    { "id": 4, "name": "ukrainian pickles" },
+    { "id": 5, "name": "salads" },
+    { "id": 6, "name": "soups" },
+    { "id": 7, "name": "hot appetizers" },
+    { "id": 8, "name": "traditional deruny" },
+    { "id": 9, "name": "dumplings" },
+    { "id": 10, "name": "meat dishes" },
+    { "id": 11, "name": "fish dishes" },
+    { "id": 12, "name": "side dishes" },
+    { "id": 13, "name": "open fire dishes" },
+    { "id": 14, "name": "shashlik" },
+    { "id": 15, "name": "lyulya kebab" },
+    { "id": 16, "name": "sauces" },
+    { "id": 17, "name": "bread basket" },
+    { "id": 18, "name": "dessert" }
   ]
 }
