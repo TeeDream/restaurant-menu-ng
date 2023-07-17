@@ -10,16 +10,25 @@
     justify-content: center;
     align-items: center;
     column-gap: 15px;
+
+    span {
+      font-family: "Roboto Light", cursive;
+      font-size: 23px;
+    }
   }
 
   mat-toolbar {
     display: flex;
     height: 5rem;
-    background-color: #ffedd5;
+    background-color: #FFFFFF;
   }
 
   .toolbar__menu-button {
     position: absolute;
     right: 16px;
+
+    @media screen and (max-width: 678px) {
+      right: 5px;
+    }
   }
 }

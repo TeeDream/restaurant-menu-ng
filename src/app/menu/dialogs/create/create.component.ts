@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { IProduct } from '@src/app/core/types/product.interface';
 
+// type CreateProduct = Omit<IProduct, 'id'>
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',

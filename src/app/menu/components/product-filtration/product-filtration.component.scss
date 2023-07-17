@@ -10,4 +10,12 @@
   p {
     padding: 0 5px;
   }
+
+  .clear-filters {
+    margin: 0 10px;
+
+    &__btn {
+      width: 100%;
+    }
+  }
 }

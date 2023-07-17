@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Subject, debounceTime, map, takeUntil } from 'rxjs';
+import { Subject, debounceTime, map, takeUntil, Observable } from 'rxjs';
 import {
   FILTER_CATEGORIES,
   filterCategories,
@@ -29,7 +29,7 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   public categories = [...FILTER_CATEGORIES];
   public formCategories = this.fb.group(this.createFormCategory());
-
+  public formCategories$!: Observable<string[] | null>;
   protected createFormCategory() {
     return this.categories.reduce((acc, category) => {
       acc[category] = false;
@@ -37,13 +37,15 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
     }, {} as BuilderFormCategory);
   }
 
-  //TODO: FormControl?
-
   public sanitizeCategory(category: string): string {
     return category.replaceAll(/[_-]/g, ' ');
   }
 
-  ngOnInit(): void {
+  public clearCategories(): void {
+    this.formCategories.reset();
+  }
+
+  public ngOnInit(): void {
     this.formCategories.valueChanges
       .pipe(
         debounceTime(300),
@@ -57,9 +59,19 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.productFilters.emit(data);
       });
+
+    this.formCategories$ = this.formCategories.valueChanges.pipe(
+      debounceTime(300),
+      map((data) =>
+        Object.entries(data)
+          .filter((data) => data[1])
+          .map((term) => term[0])
+      ),
+      takeUntil(this.destroy$)
+    );
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }

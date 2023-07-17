@@ -1,20 +1,12 @@
 .sidenav-container {
   min-height: calc(100vh - 5rem);
-  background-color: #fff7ed;
+  background-color: #EEEEEE;
 
   .sidenav {
     padding: 10px 0;
-    background-color: inherit;
     display: flex;
     justify-content: center;
-
-    .clear-filters {
-      margin: 0 10px;
-
-      &__btn {
-        width: 100%;
-      }
-    }
+    background-color: #FFFFFF;
   }
 
   .sidenav-content {
@@ -25,14 +17,14 @@
     .search-filter-wrapper {
       margin-top: 22px;
       display: flex;
-      justify-content: space-between;
 
       .spacer {
-        flex: 1 1 auto;
+        flex: 2 1 auto;
       }
 
       .search-filter {
-        flex: 1 0 auto;
+        flex: 1 1 auto;
+        margin-left: 4%;
       }
     }
 

@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { debounceTime, Subject, takeUntil } from 'rxjs';
+import { debounceTime, Observable, Subject, takeUntil } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -17,6 +17,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
   @Output() filter: EventEmitter<string> = new EventEmitter<string>();
   destroy$: Subject<void> = new Subject<void>();
   searchInput = new FormControl('');
+  searchInput$!: Observable<string | null>;
 
   clearInputValue(): void {
     this.searchInput.setValue('');
@@ -30,6 +31,11 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
 
         this.filter.emit(str);
       });
+
+    this.searchInput$ = this.searchInput.valueChanges.pipe(
+      debounceTime(300),
+      takeUntil(this.destroy$)
+    );
   }
   ngOnDestroy(): void {
     this.destroy$.next();

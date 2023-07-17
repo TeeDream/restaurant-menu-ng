@@ -2,20 +2,24 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>{{ product.name }}</mat-card-title>
-      <mat-card-subtitle>{{ product.category }}</mat-card-subtitle>
+      <mat-card-subtitle>Category: {{ product.category | titlecase }}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
   <img
     class="product-card__img"
-    mat-card-lg-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    mat-card-image
+    src="assets/coming-soon-placeholder-squoosh.jpg"
     alt=""
   />
   <mat-card-content>
-    <p>{{ product.description }}</p>
+    <mat-card-subtitle class="card-description">Description</mat-card-subtitle>
+    <p *ngIf="product.description">{{ product.description }}</p>
+    <p *ngIf="!product.description">There is no description yet.</p>
+    <mat-card-title>
+      Price: {{ product.price | currency:'UAH':'symbol-narrow': '1.0-2' }}</mat-card-title>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>Modify</button>
-    <button mat-button>Delete</button>
+  <mat-card-actions *ngIf="true">
+    <app-menu-dialog [receivedProduct]="product"></app-menu-dialog>
+    <button mat-button color="warn">Delete</button>
   </mat-card-actions>
 </mat-card>
