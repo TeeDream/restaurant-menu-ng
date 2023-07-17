@@ -1,1 +1,27 @@
-<p>modify works!</p>
+<form [formGroup]="modifyProductGroup">
+  <h1 mat-dialog-title>Modify product</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close color="primary" (click)="onNoClick()" cdkFocusInitial>No Thanks</button>
+    <button mat-button color="warn" [mat-dialog-close]="modifyProductGroup.value">
+      Save Changes
+    </button>
+  </div>
+</form>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateComponent } from '../create/create.component';
+import { IProduct } from '@src/app/core/types/product.interface';
+import { ModifyComponent } from '@src/app/menu/dialogs/modify/modify.component';
 
 @Component({
   selector: 'app-menu-dialog',
@@ -8,18 +9,17 @@ import { CreateComponent } from '../create/create.component';
   styleUrls: ['./menu-dialog.component.scss'],
 })
 export class MenuDialogComponent {
-  animal = '';
-  name = '';
+  @Input() receivedProduct!: IProduct;
 
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateComponent, {
-      data: { name: this.name, animal: this.animal },
+    const dialogRef = this.dialog.open(ModifyComponent, {
+      data: this.receivedProduct,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.animal = result;
+      console.log(result);
     });
   }
 }

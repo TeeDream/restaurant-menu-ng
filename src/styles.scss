@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Roboto&display=swap');
+
 html,
 body {
   height: 100%;
@@ -14,13 +16,11 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
   min-width: 320px;
   background-color: #fff7ed;
 }
 
 main {
   min-height: calc(100vh - 5rem);
-}
-.navigation-menu {
-  background-color: #fff7ed !important;
 }
