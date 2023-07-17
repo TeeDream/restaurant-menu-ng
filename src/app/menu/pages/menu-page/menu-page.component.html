@@ -1,17 +1,17 @@
 <mat-drawer-container class="sidenav-container" autosize>
   <mat-drawer #drawer class="sidenav" mode="over">
     <app-product-filtration
-      (productFilters)="filtersHandler($event)"
+      (productFilters)="menuCategoriesHandler($event)"
     ></app-product-filtration>
   </mat-drawer>
   <div class="sidenav-content">
     <div class="search-filter-wrapper">
       <div class="spacer"></div>
       <div class="search-filter">
-      <app-product-search (filter)="filterHandler($event)"></app-product-search>
-      <button type="button" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon>filter_list</mat-icon>
-      </button>
+        <app-product-search (filter)="menuQueryHandler($event)"></app-product-search>
+        <button type="button" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>filter_list</mat-icon>
+        </button>
       </div>
       <div class="spacer"></div>
     </div>

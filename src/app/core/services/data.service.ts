@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, of, retry, take } from 'rxjs';
-import { IProduct } from '../types/product.interface';
-
-interface CategoryInterface {
-  id: number;
-  categoryName: string;
-  categoryId: number;
-}
+import { catchError, Observable, of, retry, take } from 'rxjs';
+import { CategoryInterface, IProduct } from '@src/app/core/types';
+import { MenuFilters } from '@src/app/menu/types/menu.filters';
 
 @Injectable({
   providedIn: 'root',
@@ -15,34 +10,48 @@ interface CategoryInterface {
 export class DataService {
   constructor(private http: HttpClient) {}
 
-  private readonly productsUrl = 'http://localhost:3000/products';
-  private readonly categoriesUrl = 'http://localhost:3000/categories';
+  private readonly BASE_URL = 'http://localhost:3000/';
+  private readonly PRODUCTS = 'products';
+  private readonly CATEGORIES = 'categories';
 
-  public getProducts(filter: string[]): Observable<IProduct[]> {
-    if (!filter.length) return of([]);
+  public getFilteredProducts({
+    filters,
+    query,
+  }: MenuFilters): Observable<IProduct[]> {
+    if (!filters.length && !query) return of([]);
 
     return this.http
-      .get<IProduct[]>(this.productsUrl, { params: { category: filter } })
+      .get<IProduct[]>(this.BASE_URL + this.PRODUCTS, {
+        params: query
+          ? { category: filters, name_like: query }
+          : { category: filters },
+      })
       .pipe(
         take(1),
-        retry(1),
-        catchError(this.handleError<IProduct[]>('getProducts', []))
+        retry(3),
+        catchError(this.handleError<IProduct[]>('getFilteredProducts', []))
       );
   }
 
   public createProduct(product: Omit<IProduct, 'id'>): Observable<IProduct> {
-    return this.http.post(this.productsUrl, product) as Observable<IProduct>;
+    return this.http.post(
+      this.BASE_URL + this.PRODUCTS,
+      product
+    ) as Observable<IProduct>;
   }
 
   public updateProduct(
     id: number,
     obj: Partial<IProduct>
   ): Observable<IProduct> {
-    return this.http.patch<IProduct>(this.productsUrl + `/${id}`, obj);
+    return this.http.patch<IProduct>(
+      this.BASE_URL + this.PRODUCTS + `/${id}`,
+      obj
+    );
   }
 
   public deleteProduct(id: number): Observable<object> {
-    return this.http.delete(this.productsUrl + `/${id}`);
+    return this.http.delete(this.BASE_URL + this.PRODUCTS + `/${id}`);
   }
 
   public updateCategory(
@@ -50,33 +59,13 @@ export class DataService {
     obj: Partial<CategoryInterface>
   ): Observable<CategoryInterface> {
     return this.http.patch<CategoryInterface>(
-      this.categoriesUrl + `/${id}`,
+      this.BASE_URL + this.CATEGORIES + `/${id}`,
       obj
     );
   }
 
   public deleteCategory(id: number): Observable<object> {
-    return this.http.delete(this.categoriesUrl + `/${id}`);
-  }
-
-  public productsByFilter(arr: string[]): Observable<IProduct[]> {
-    return this.getProducts(arr);
-  }
-
-  public getProductsBySearch(query: string): Observable<IProduct[]> {
-    if (!query) return of([]);
-
-    return this.http
-      .get<IProduct[]>(this.productsUrl, { params: { name_like: query } })
-      .pipe(
-        take(1),
-        retry(1),
-        catchError(this.handleError<IProduct[]>('getProducts', []))
-      );
-  }
-
-  public productsBySearch(str: string): Observable<IProduct[]> {
-    return this.getProductsBySearch(str);
+    return this.http.delete(this.BASE_URL + this.CATEGORIES + `/${id}`);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

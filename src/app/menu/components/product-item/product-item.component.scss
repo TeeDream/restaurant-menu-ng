@@ -12,6 +12,10 @@
     word-break: break-all;
     text-align: center;
     justify-content: center;
+
+    mat-card-title {
+      word-break: normal;
+    }
   }
 
   img {

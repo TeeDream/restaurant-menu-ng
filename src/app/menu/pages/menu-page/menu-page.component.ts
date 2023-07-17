@@ -1,36 +1,34 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { merge, Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DataService } from 'src/app/core/services/data.service';
 import { IProduct } from 'src/app/core/types/product.interface';
-import { ProductSearchComponent } from '@src/app/menu/components/product-search/product-search.component';
-import { ProductFiltrationComponent } from '@src/app/menu/components/product-filtration/product-filtration.component';
+import { MenuFilters } from '@src/app/menu/types/menu.filters';
 
 @Component({
   selector: 'app-menu-page',
   templateUrl: './menu-page.component.html',
   styleUrls: ['./menu-page.component.scss'],
 })
-export class MenuPageComponent implements AfterViewInit {
+export class MenuPageComponent {
   constructor(private dataService: DataService) {}
 
-  @ViewChild(ProductSearchComponent) searchProduct!: ProductSearchComponent;
-  @ViewChild(ProductFiltrationComponent)
-  filtrationProduct!: ProductFiltrationComponent;
-
   products$!: Observable<IProduct[]>;
+  menuFilters: MenuFilters = {
+    filters: [],
+    query: '',
+  };
 
-  public filtersHandler(arr: string[]): void {
-    this.products$ = this.dataService.productsByFilter(arr);
+  public menuCategoriesHandler(arr: string[]): void {
+    this.menuFilters.filters = arr;
+    this.getProducts();
   }
 
-  public filterHandler(str: string): void {
-    this.products$ = this.dataService.productsBySearch(str);
+  public menuQueryHandler(query: string): void {
+    this.menuFilters.query = query;
+    this.getProducts();
   }
 
-  public ngAfterViewInit(): void {
-    merge(
-      this.searchProduct.searchInput$,
-      this.filtrationProduct.formCategories$
-    ).subscribe((data) => console.log(data));
+  private getProducts(): void {
+    this.products$ = this.dataService.getFilteredProducts(this.menuFilters);
   }
 }

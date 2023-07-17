@@ -16,6 +16,7 @@ export class ModifyComponent {
 
   modifyProductGroup = new FormGroup({
     name: new FormControl(this.data.name, [Validators.required]),
+    // custom validator str.test/^[a-z]{1, 3}/ig
     price: new FormControl(this.data.price, [Validators.required]),
     category: new FormControl(this.data.category, [Validators.required]),
     description: new FormControl(this.data.description),
