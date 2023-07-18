@@ -13,7 +13,7 @@ export class MenuPageComponent {
   constructor(private dataService: DataService) {}
 
   products$!: Observable<IProduct[]>;
-  menuFilters: MenuFilters = {
+  private menuFilters: MenuFilters = {
     filters: [],
     query: '',
   };

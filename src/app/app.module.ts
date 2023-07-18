@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { MenuModule } from './menu/menu.module';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { AuthModule } from '@src/app/auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, MainPageComponent, ErrorPageComponent],
@@ -19,6 +20,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
     BrowserAnimationsModule,
     CoreModule,
     MenuModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

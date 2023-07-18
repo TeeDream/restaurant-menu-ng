@@ -24,14 +24,23 @@
         <mat-icon>restaurant_menu</mat-icon>
         <span>Menu</span>
       </a>
-      <a routerLink="/" mat-menu-item>
-        <mat-icon>login</mat-icon>
-        <span>Login</span>
-      </a>
-      <a routerLink="/" mat-menu-item>
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </a>
+
+      <ng-container *ngIf="isAuth$| async; else register ">
+        <a routerLink="/" mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </a>
+      </ng-container>
+      <ng-template #register>
+        <a routerLink="/login" mat-menu-item>
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
+        </a>
+        <a routerLink="/" mat-menu-item>
+          <mat-icon>person_add</mat-icon>
+          <span>Sign Up</span>
+        </a>
+      </ng-template>
     </mat-menu>
   </mat-toolbar>
 </header>
