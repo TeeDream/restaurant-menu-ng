@@ -1,1 +1,26 @@
-<p>register-page works!</p>
+<div class="register-wrapper">
+  <mat-card>
+    <h2>Register Form</h2>
+    <form class="register-form" [formGroup]="loginGroup">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email">
+        <!--    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput placeholder="qwerty" formControlName="password">
+        <!--    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput placeholder="qwerty" formControlName="confirmPassword">
+        <!--    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>-->
+      </mat-form-field>
+      <div class="register-buttons">
+        <button mat-button color="primary" (submit)="onSubmit()">Register Me</button>
+        <button mat-button color="primary" type="submit" routerLink="/login">Login</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
