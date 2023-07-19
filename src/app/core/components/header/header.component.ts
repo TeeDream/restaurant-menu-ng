@@ -12,7 +12,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(private auth: AuthService) {}
 
+  public onLogOut(): void {
+    this.auth.logOut();
+  }
+
   ngOnInit(): void {
-    this.isAuth$ = this.auth.getLogInStatus().pipe();
+    this.isAuth$ = this.auth.getLogInStatus$();
   }
 }

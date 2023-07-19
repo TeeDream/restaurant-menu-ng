@@ -1,7 +1,7 @@
 <div class="login-wrapper">
   <mat-card>
     <h2>Login Form</h2>
-    <form class="login-form" [formGroup]="loginGroup">
+    <form class="login-form" [formGroup]="loginGroup" (submit)="onSubmit()">
       <mat-form-field appearance="outline">
         <mat-label>Enter your email</mat-label>
         <input matInput placeholder="pat@example.com" formControlName="email">
@@ -13,7 +13,7 @@
         <!--    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>-->
       </mat-form-field>
       <div class="login-buttons">
-        <button mat-button color="primary" (submit)="onSubmit()">Log In</button>
+        <button mat-button color="primary" type="submit">Log In</button>
         <button mat-button color="primary" type="button" routerLink="/register">
           Registration
         </button>

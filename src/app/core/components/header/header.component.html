@@ -26,7 +26,7 @@
       </a>
 
       <ng-container *ngIf="isAuth$| async; else register ">
-        <a routerLink="/" mat-menu-item>
+        <a routerLink="/" mat-menu-item (click)="onLogOut()">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
         </a>

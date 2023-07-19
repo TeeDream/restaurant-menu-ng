@@ -36,8 +36,7 @@ export class RegisterPageComponent implements OnInit {
   // }
 
   public onSubmit(): void {
-    // this.router.routerState.snapsho.t
-
+    // this.router.routerState.snapshot
     if (
       !this.loginGroup.valid ||
       !(this.loginGroup.value.email && this.loginGroup.value.password)

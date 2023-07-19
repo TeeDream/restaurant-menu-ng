@@ -32,20 +32,16 @@ export class LoginPageComponent implements OnInit {
   // }
 
   public onSubmit(): void {
-    // this.router.routerState.snapsho.t
+    // this.router.routerState.snapshot
 
-    if (
-      !this.loginGroup.valid ||
-      !(this.loginGroup.value.email && this.loginGroup.value.password)
-    )
-      return;
+    if (!this.loginGroup.valid) return;
 
-    this.auth.registerUser({
-      email: this.loginGroup.value.email,
-      password: this.loginGroup.value.password,
-      name: 'Tomas',
-    });
-    // .subscribe((data) => console.log(data));
+    this.auth
+      .logIn({
+        email: this.loginGroup.value.email as string,
+        password: this.loginGroup.value.password as string,
+      })
+      .subscribe((data) => console.log(data));
   }
 
   ngOnInit(): void {

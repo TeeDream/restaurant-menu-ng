@@ -505,51 +505,59 @@
       "id": 83,
       "price": "98",
       "name": "Berry Cheesecake 100 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 84,
       "price": "129",
       "name": "Baked Pancakes with Homemade Cheese and Raisins in a Pot 140/20/50 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 85,
       "price": "126",
       "name": "Poppy Seed Pancakes 140/50 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 86,
       "price": "198",
       "name": "Pear Tart with Ice Cream 300/50 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 87,
       "price": "98",
       "name": "Napoleon Cake",
       "description": "price per 100 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 88,
       "price": "106",
       "name": "Medovik Cake",
       "description": "price per 100 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 89,
       "price": "60",
       "name": "Ice Cream, Sorbet 100 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     },
     {
       "id": 90,
       "price": "135",
       "name": "Cottage Cheese Pancakes with Sour Cream 150/50 g",
-      "category": "dessert"
+      "category": "dessert",
+      "categoryId": 18
     }
   ],
   "categories": [
@@ -630,7 +638,8 @@
     {
       "email": "tfhalloween@gmail.com",
       "password": "$2a$10$8B5Y./KwFHgtZW/NhbQo.eo/o8Nj6SvGl54XRDOllMoqmVHs1j/Ga",
-      "id": 1
+      "id": 1,
+      "admin": true
     }
   ]
 }
