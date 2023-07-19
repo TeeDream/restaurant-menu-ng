@@ -1,7 +1,7 @@
 <div class="register-wrapper">
   <mat-card>
     <h2>Register Form</h2>
-    <form class="register-form" [formGroup]="loginGroup">
+    <form class="register-form" [formGroup]="loginGroup" (submit)="onSubmit()">
       <mat-form-field appearance="outline">
         <mat-label>Enter your email</mat-label>
         <input matInput placeholder="pat@example.com" formControlName="email">
@@ -18,8 +18,8 @@
         <!--    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>-->
       </mat-form-field>
       <div class="register-buttons">
-        <button mat-button color="primary" (submit)="onSubmit()">Register Me</button>
-        <button mat-button color="primary" type="submit" routerLink="/login">Login</button>
+        <button mat-button color="primary" type="submit">Register Me</button>
+        <button mat-button color="primary" type="button" routerLink="/login">Login</button>
       </div>
     </form>
   </mat-card>

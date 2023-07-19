@@ -4,6 +4,7 @@ import { DataService } from 'src/app/core/services/data.service';
 import { IProduct } from 'src/app/core/types/product.interface';
 import { MenuFilters } from '@src/app/menu/types/menu.filters';
 import { AuthService } from '@src/app/auth/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menu-page',
@@ -11,15 +12,20 @@ import { AuthService } from '@src/app/auth/services/auth.service';
   styleUrls: ['./menu-page.component.scss'],
 })
 export class MenuPageComponent implements OnInit {
-  constructor(private dataService: DataService, private auth: AuthService) {}
-
-  products$!: Observable<IProduct[]>;
-  isAuth$!: Observable<boolean>;
-
+  public products$!: Observable<IProduct[]>;
+  public isAuth$!: Observable<boolean>;
+  public isAdmin!: boolean;
+  public isEditing = false;
   private menuFilters: MenuFilters = {
     filters: [],
     query: '',
   };
+
+  constructor(
+    private dataService: DataService,
+    private auth: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
   public menuCategoriesHandler(arr: string[]): void {
     this.menuFilters.filters = arr;
@@ -35,7 +41,9 @@ export class MenuPageComponent implements OnInit {
     this.products$ = this.dataService.getFilteredProducts(this.menuFilters);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.isAuth$ = this.auth.getLogInStatus$();
+    this.isAdmin = this.auth.isAdmin;
+    this.isEditing = this.route.routeConfig?.path === 'menu/edit';
   }
 }

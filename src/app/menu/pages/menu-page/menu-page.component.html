@@ -20,6 +20,8 @@
         *ngFor="let product of products$ | async;"
         [product]="product"
         [isAuth]="isAuth$ | async"
+        [isAdmin]="isAdmin"
+        [isEditing]="isEditing"
       ></app-product-item>
     </div>
   </div>

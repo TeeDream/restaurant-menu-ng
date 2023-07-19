@@ -9,4 +9,6 @@ import { IProduct } from 'src/app/core/types/product.interface';
 export class ProductItemComponent {
   @Input() product!: IProduct;
   @Input() isAuth!: boolean | null;
+  @Input() isAdmin!: boolean;
+  @Input() isEditing!: boolean;
 }

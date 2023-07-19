@@ -3,10 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   BehaviorSubject,
   catchError,
-  delay,
   map,
   Observable,
-  of,
   retry,
   take,
   tap,
@@ -34,18 +32,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // store the URL so we can redirect after logging in
-
-  login(): Observable<boolean> {
-    return of(true).pipe(
-      delay(1000),
-      tap(() => (this.isLoggedIn = true))
-    );
-  }
-
-  logout(): void {
-    this.isLoggedIn = false;
-  }
+  // store the URL, so we can redirect after logging in ???
 
   public registerUser(user: RegistrationInterface): Observable<UserInterface> {
     return this.http
@@ -53,12 +40,13 @@ export class AuthService {
       .pipe(
         retry(3),
         map((response) => response.user),
+        take(1),
         catchError(this.handleError)
       );
   }
 
   public logIn(
-    user: Omit<RegistrationInterface, 'name'>
+    user: RegistrationInterface
   ): Observable<RegistrationLoginResponse> {
     return this.http
       .post<RegistrationLoginResponse>(this.BASE_URL + this.LOGIN, user)
@@ -113,23 +101,19 @@ export class AuthService {
     localStorage.setItem(this.IS_ADMIN, String(false));
   }
 
-  public checkIsLoggedIn(): boolean {
-    if (this.getAccessToken()) {
-      this.isLoggedIn = true;
-      this.isLoggedIn$.next(this.isLoggedIn);
-      this.isAdmin = this.getRole();
+  public checkIsLoggedIn(): void {
+    if (!this.getAccessToken()) return;
 
-      return true;
-    }
-
-    return false;
+    this.isLoggedIn = true;
+    this.isLoggedIn$.next(this.isLoggedIn);
+    this.isAdmin = this.getRole();
   }
 
   public getLogInStatus$(): Observable<boolean> {
     return this.isLoggedIn$.asObservable();
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.status === 0) {
       console.error('An error occurred:', error.error);
     } else {

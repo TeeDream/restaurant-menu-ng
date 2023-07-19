@@ -41,7 +41,10 @@ export class LoginPageComponent implements OnInit {
         email: this.loginGroup.value.email as string,
         password: this.loginGroup.value.password as string,
       })
-      .subscribe((data) => console.log(data));
+      .subscribe((data) => {
+        // this.router.navigate(['/']);
+        console.log(data);
+      });
   }
 
   ngOnInit(): void {
