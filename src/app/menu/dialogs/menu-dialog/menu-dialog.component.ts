@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IProduct } from '@src/app/core/types/product.interface';
+import { ProductInterface } from '@src/app/core/types/product.interface';
 import { ModifyComponent } from '@src/app/menu/dialogs/modify/modify.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { ModifyComponent } from '@src/app/menu/dialogs/modify/modify.component';
   styleUrls: ['./menu-dialog.component.scss'],
 })
 export class MenuDialogComponent {
-  @Input() receivedProduct!: IProduct;
+  @Input() receivedProduct!: ProductInterface;
 
   constructor(public dialog: MatDialog) {}
 

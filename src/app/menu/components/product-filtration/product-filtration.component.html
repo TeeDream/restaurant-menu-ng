@@ -1,14 +1,15 @@
-<section class="filter-section" [formGroup]="formCategories">
-  <h2>Select categories:</h2>
-  <p *ngFor="let category of categories">
-    <mat-checkbox [formControlName]="category">{{
-      sanitizeCategory(category) | uppercase
-    }}</mat-checkbox>
-  </p>
-
-  <div class="clear-filters">
-    <button mat-raised-button class="clear-filters__btn" (click)="clearCategories()">
-      Clear Categories
-    </button>
-  </div>
-</section>
+<ng-container *ngIf="categories">
+  <section class="filter-section" [formGroup]="formCategories">
+    <h2>Select categories:</h2>
+    <p *ngFor="let category of categories">
+      <mat-checkbox [formControlName]="category.id">{{
+        sanitizeCategory(category.name) | uppercase
+        }}</mat-checkbox>
+    </p>
+    <div class="clear-filters">
+      <button mat-raised-button class="clear-filters__btn" (click)="clearCategories()">
+        Clear Categories
+      </button>
+    </div>
+  </section>
+</ng-container>

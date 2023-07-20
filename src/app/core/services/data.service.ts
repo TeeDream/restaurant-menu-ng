@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, retry, take } from 'rxjs';
-import { CategoryInterface, IProduct } from '@src/app/core/types';
+import { CategoryInterface, ProductInterface } from '@src/app/core/types';
 import { MenuFilters } from '@src/app/menu/types/menu.filters';
 
 @Injectable({
@@ -17,34 +17,38 @@ export class DataService {
   public getFilteredProducts({
     filters,
     query,
-  }: MenuFilters): Observable<IProduct[]> {
+  }: MenuFilters): Observable<ProductInterface[]> {
     if (!filters.length && !query) return of([]);
 
     return this.http
-      .get<IProduct[]>(this.BASE_URL + this.PRODUCTS, {
+      .get<ProductInterface[]>(this.BASE_URL + this.PRODUCTS, {
         params: query
-          ? { category: filters, name_like: query }
-          : { category: filters },
+          ? { categoryId: filters, name_like: query, _expand: 'category' }
+          : { categoryId: filters, _expand: 'category' },
       })
       .pipe(
         take(1),
         retry(3),
-        catchError(this.handleError<IProduct[]>('getFilteredProducts', []))
+        catchError(
+          this.handleError<ProductInterface[]>('getFilteredProducts', [])
+        )
       );
   }
 
-  public createProduct(product: Omit<IProduct, 'id'>): Observable<IProduct> {
+  public createProduct(
+    product: Omit<ProductInterface, 'id'>
+  ): Observable<ProductInterface> {
     return this.http.post(
       this.BASE_URL + this.PRODUCTS,
       product
-    ) as Observable<IProduct>;
+    ) as Observable<ProductInterface>;
   }
 
   public updateProduct(
     id: number,
-    obj: Partial<IProduct>
-  ): Observable<IProduct> {
-    return this.http.patch<IProduct>(
+    obj: Partial<ProductInterface>
+  ): Observable<ProductInterface> {
+    return this.http.patch<ProductInterface>(
       this.BASE_URL + this.PRODUCTS + `/${id}`,
       obj
     );
@@ -52,6 +56,20 @@ export class DataService {
 
   public deleteProduct(id: number): Observable<object> {
     return this.http.delete(this.BASE_URL + this.PRODUCTS + `/${id}`);
+  }
+
+  public getCategories(): Observable<CategoryInterface[]> {
+    return this.http
+      .get<CategoryInterface[]>(this.BASE_URL + this.CATEGORIES)
+      .pipe(retry(2), take(1));
+  }
+
+  public createCategory({
+    name,
+  }: Omit<CategoryInterface, 'id'>): Observable<CategoryInterface[]> {
+    return this.http
+      .post<CategoryInterface[]>(this.BASE_URL + this.CATEGORIES, { name })
+      .pipe(retry(2), take(1));
   }
 
   public updateCategory(
@@ -64,8 +82,10 @@ export class DataService {
     );
   }
 
-  public deleteCategory(id: number): Observable<object> {
-    return this.http.delete(this.BASE_URL + this.CATEGORIES + `/${id}`);
+  public deleteCategory({ id }: CategoryInterface): Observable<object> {
+    return this.http
+      .delete<CategoryInterface>(this.BASE_URL + this.CATEGORIES + `/${id}`)
+      .pipe(retry(2), take(1));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

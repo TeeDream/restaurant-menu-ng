@@ -1,7 +1,13 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
 .product-card {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
   max-width: 400px;
   min-width: 300px;
   min-height: 300px;

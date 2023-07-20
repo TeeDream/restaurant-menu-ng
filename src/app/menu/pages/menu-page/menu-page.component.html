@@ -2,6 +2,7 @@
   <mat-drawer #drawer class="sidenav" mode="over">
     <app-product-filtration
       (productFilters)="menuCategoriesHandler($event)"
+      [categories$]="categories$"
     ></app-product-filtration>
   </mat-drawer>
   <div class="sidenav-content">

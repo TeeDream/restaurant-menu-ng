@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IProduct } from 'src/app/core/types/product.interface';
+import { ProductInterface } from 'src/app/core/types/product.interface';
 
 @Component({
   selector: 'app-product-item',
@@ -7,7 +7,7 @@ import { IProduct } from 'src/app/core/types/product.interface';
   styleUrls: ['./product-item.component.scss'],
 })
 export class ProductItemComponent {
-  @Input() product!: IProduct;
+  @Input() product!: ProductInterface;
   @Input() isAuth!: boolean | null;
   @Input() isAdmin!: boolean;
   @Input() isEditing!: boolean;

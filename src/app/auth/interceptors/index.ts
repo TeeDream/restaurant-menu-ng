@@ -1,4 +1,3 @@
-/* "Barrel" of Http Interceptors */
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from "@src/app/auth/interceptors/token.interceptor";
 

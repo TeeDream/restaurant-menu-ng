@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>{{ product.name }}</mat-card-title>
-      <mat-card-subtitle>Category: {{ product.category | titlecase }}</mat-card-subtitle>
+      <mat-card-subtitle>Category: {{ product.category.name | titlecase }}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
   <img
@@ -18,12 +18,10 @@
     <mat-card-title>
       Price: {{ product.price | currency:'UAH':'symbol-narrow': '1.0-2' }}</mat-card-title>
   </mat-card-content>
-  <ng-container *ngIf="isAdmin">
-    <ng-container *ngIf="isEditing">
-      <mat-card-actions *ngIf="isAuth">
-        <app-menu-dialog [receivedProduct]="product"></app-menu-dialog>
-        <button mat-button color="warn">Delete</button>
-      </mat-card-actions>
-    </ng-container>
+  <ng-container *ngIf="isAdmin && isEditing">
+    <mat-card-actions *ngIf="isAuth">
+      <app-menu-dialog [receivedProduct]="product"></app-menu-dialog>
+      <button mat-button color="warn">Delete</button>
+    </mat-card-actions>
   </ng-container>
 </mat-card>
