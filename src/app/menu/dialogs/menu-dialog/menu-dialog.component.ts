@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductInterface } from '@src/app/core/types/product.interface';
 import { ModifyComponent } from '@src/app/menu/dialogs/modify/modify.component';
+import { CategoryInterface } from '@src/app/core/types';
 
 @Component({
   selector: 'app-menu-dialog',
@@ -10,12 +11,16 @@ import { ModifyComponent } from '@src/app/menu/dialogs/modify/modify.component';
 })
 export class MenuDialogComponent {
   @Input() receivedProduct!: ProductInterface;
+  @Input() categories!: CategoryInterface[];
 
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModifyComponent, {
-      data: this.receivedProduct,
+      data: {
+        product: this.receivedProduct,
+        categories: this.categories,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

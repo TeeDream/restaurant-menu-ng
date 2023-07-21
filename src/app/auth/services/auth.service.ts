@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -19,7 +19,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
   private readonly BASE_URL = 'http://localhost:3000/';
   private readonly REGISTER = 'register';
   private readonly LOGIN = 'login';
@@ -28,19 +28,19 @@ export class AuthService {
   private isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn = false;
   isAdmin = false;
-  redirectUrl: string | null = null;
+  isAdmin$ = new BehaviorSubject<boolean>(false);
+
+  // redirectUrl: string | null = null;
 
   constructor(private http: HttpClient) {}
-
-  // store the URL, so we can redirect after logging in ???
 
   public registerUser(user: RegistrationInterface): Observable<UserInterface> {
     return this.http
       .post<RegistrationLoginResponse>(this.BASE_URL + this.REGISTER, user)
       .pipe(
-        retry(3),
-        map((response) => response.user),
+        retry(2),
         take(1),
+        map((response) => response.user),
         catchError(this.handleError)
       );
   }
@@ -51,12 +51,13 @@ export class AuthService {
     return this.http
       .post<RegistrationLoginResponse>(this.BASE_URL + this.LOGIN, user)
       .pipe(
+        retry(2),
+        take(1),
         tap((response) => {
           this.setAccessToken(response);
           this.setRole(response);
         }),
-        retry(3),
-        take(1)
+        catchError(this.handleError)
       );
   }
 
@@ -64,6 +65,7 @@ export class AuthService {
     this.deleteAccessToken();
     this.removeRole();
     this.isAdmin = false;
+    this.isAdmin$.next(this.isAdmin);
     this.isLoggedIn = false;
     this.isLoggedIn$.next(this.isLoggedIn);
   }
@@ -89,6 +91,7 @@ export class AuthService {
     );
 
     this.isAdmin = user.admin ? user.admin : false;
+    this.isAdmin$.next(this.isAdmin);
   }
 
   private getRole(): boolean {
@@ -107,6 +110,7 @@ export class AuthService {
     this.isLoggedIn = true;
     this.isLoggedIn$.next(this.isLoggedIn);
     this.isAdmin = this.getRole();
+    this.isAdmin$.next(this.isAdmin);
   }
 
   public getLogInStatus$(): Observable<boolean> {
@@ -126,5 +130,10 @@ export class AuthService {
     return throwError(
       () => new Error('Something bad happened; please try again later.')
     );
+  }
+
+  ngOnDestroy(): void {
+    this.isLoggedIn$.complete();
+    this.isAdmin$.complete();
   }
 }

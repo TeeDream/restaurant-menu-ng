@@ -24,8 +24,13 @@
         <mat-icon>restaurant_menu</mat-icon>
         <span>Menu</span>
       </a>
-
-      <ng-container *ngIf="isAuth$| async; else register ">
+      <ng-container *ngIf="isAdmin$ | async">
+        <a routerLink="/menu/edit" mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="isAuth$ | async; else register">
         <a routerLink="/" mat-menu-item (click)="onLogOut()">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>

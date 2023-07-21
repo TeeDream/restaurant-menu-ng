@@ -16,6 +16,9 @@
       </div>
       <div class="spacer"></div>
     </div>
+    <ng-container *ngIf="isAdmin && isEditing">
+      <app-create-product-btn [categories]="categories"></app-create-product-btn>
+    </ng-container>
     <div class="product-wrapper">
       <app-product-item
         *ngFor="let product of products$ | async;"
@@ -23,6 +26,7 @@
         [isAuth]="isAuth$ | async"
         [isAdmin]="isAdmin"
         [isEditing]="isEditing"
+        [categories]="categories"
       ></app-product-item>
     </div>
   </div>

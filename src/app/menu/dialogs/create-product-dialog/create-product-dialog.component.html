@@ -1,5 +1,5 @@
-<form [formGroup]="modifyProductGroup" (submit)="onChangesSubmit()">
-  <h1 mat-dialog-title>Modify product</h1>
+<form [formGroup]="createProductGroup" (submit)="onCreateSubmit()">
+  <h1 mat-dialog-title>Create product</h1>
   <div mat-dialog-content>
     <mat-form-field>
       <mat-label>Name</mat-label>
@@ -30,7 +30,7 @@
         </mat-option>
       </mat-select>
       <mat-error
-        *ngIf="modifyProductGroup.controls.category.hasError('required')"
+        *ngIf="createProductGroup.controls.category.hasError('required')"
       >Please choose an category
       </mat-error>
     </mat-form-field>
@@ -47,10 +47,9 @@
     <button
       mat-button
       type="submit"
-      color="warn"
-      [mat-dialog-close]="modifyProductGroup.value"
+      color="primary"
     >
-      Save Changes
+      Create Product
     </button>
   </div>
 </form>

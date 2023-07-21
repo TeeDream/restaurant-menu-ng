@@ -4,22 +4,41 @@
     <form class="register-form" [formGroup]="loginGroup" (submit)="onSubmit()">
       <mat-form-field appearance="outline">
         <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="email">
-        <!--    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        <input matInput placeholder="pat@example.com" formControlName="email" />
+        <mat-error *ngIf="loginGroup.controls.email.invalid">{{
+          getErrorMessage("email")
+          }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Enter your password</mat-label>
-        <input matInput placeholder="qwerty" formControlName="password">
-        <!--    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>-->
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="qwerty"
+               formControlName="password" />
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off'
+          : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="loginGroup.controls.password.invalid">{{
+          getErrorMessage("password")
+          }}</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="outline">
-        <mat-label>Enter your password</mat-label>
-        <input matInput placeholder="qwerty" formControlName="confirmPassword">
-        <!--    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>-->
+        <mat-label>Confirm your password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          placeholder="qwerty"
+          formControlName="confirmPassword"
+        />
+        <mat-icon matSuffix (click)="hideConfirm = !hideConfirm">{{hideConfirm ? 'visibility_off'
+          : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="loginGroup.controls.confirmPassword.invalid">
+          {{ getErrorMessage("confirmPassword") }}
+        </mat-error>
       </mat-form-field>
       <div class="register-buttons">
         <button mat-button color="primary" type="submit">Register Me</button>
-        <button mat-button color="primary" type="button" routerLink="/login">Login</button>
+        <button mat-button color="primary" type="button" routerLink="/login">
+          Login
+        </button>
       </div>
     </form>
   </mat-card>

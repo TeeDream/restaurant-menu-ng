@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { catchError, Observable, of, retry, take } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { catchError, Observable, of, retry, Subject, take } from 'rxjs';
 import { CategoryInterface, ProductInterface } from '@src/app/core/types';
 import { MenuFilters } from '@src/app/menu/types/menu.filters';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DataService {
-  constructor(private http: HttpClient) {}
-
+export class DataService implements OnDestroy {
   private readonly BASE_URL = 'http://localhost:3000/';
   private readonly PRODUCTS = 'products';
   private readonly CATEGORIES = 'categories';
+  public renewProducts$ = new Subject<void>();
+
+  constructor(private http: HttpClient) {}
 
   public getFilteredProducts({
     filters,
@@ -36,7 +37,7 @@ export class DataService {
   }
 
   public createProduct(
-    product: Omit<ProductInterface, 'id'>
+    product: Omit<ProductInterface, 'id' | 'category'>
   ): Observable<ProductInterface> {
     return this.http.post(
       this.BASE_URL + this.PRODUCTS,
@@ -46,12 +47,14 @@ export class DataService {
 
   public updateProduct(
     id: number,
-    obj: Partial<ProductInterface>
+    product: Partial<ProductInterface>
   ): Observable<ProductInterface> {
-    return this.http.patch<ProductInterface>(
-      this.BASE_URL + this.PRODUCTS + `/${id}`,
-      obj
-    );
+    return this.http
+      .patch<ProductInterface>(
+        this.BASE_URL + this.PRODUCTS + `/${id}`,
+        product
+      )
+      .pipe(retry(2), take(1));
   }
 
   public deleteProduct(id: number): Observable<object> {
@@ -94,5 +97,9 @@ export class DataService {
 
       return of(result as T);
     };
+  }
+
+  public ngOnDestroy(): void {
+    this.renewProducts$.complete();
   }
 }

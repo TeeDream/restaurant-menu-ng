@@ -20,8 +20,8 @@
   </mat-card-content>
   <ng-container *ngIf="isAdmin && isEditing">
     <mat-card-actions *ngIf="isAuth">
-      <app-menu-dialog [receivedProduct]="product"></app-menu-dialog>
-      <button mat-button color="warn">Delete</button>
+      <app-menu-dialog [categories]="categories" [receivedProduct]="product"></app-menu-dialog>
+      <app-delete-product [receivedProduct]="product"></app-delete-product>
     </mat-card-actions>
   </ng-container>
 </mat-card>

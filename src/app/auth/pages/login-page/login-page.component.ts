@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@src/app/auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,33 +8,50 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss'],
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
+  hide = true;
+  loginGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(9),
+      Validators.pattern(/^[a-zA-Z0-9]+$/),
+    ]),
+  });
+
   constructor(
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  loginGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-  });
+  getErrorMessage(field: 'email' | 'password'): string {
+    switch (field) {
+      case 'email':
+        return this.loginGroup.controls.email.hasError('required')
+          ? 'Email is required'
+          : this.loginGroup.controls.email.hasError('email')
+          ? 'Please enter a valid email address'
+          : '';
 
-  // getErrorMessage() {
-  //   if (this.loginGroup.value.email.hasError('required')) {
-  //     return 'You must enter a value';
-  //   }
-  //
-  //   return this.loginGroup.value.email.hasError('email') ? 'Not a valid email' : '';
-  // }
+      case 'password':
+        return this.loginGroup.controls.password.hasError('required')
+          ? 'Password is required'
+          : this.loginGroup.controls.password.hasError('pattern')
+          ? 'Please use only a-z in any case and numbers.'
+          : this.loginGroup.controls.password.hasError('minlength')
+          ? 'Password must be at least 5 chars long.'
+          : this.loginGroup.controls.password.hasError('maxlength')
+          ? "Password can't be longer than 9 chars."
+          : '';
+      default:
+        return '';
+    }
+  }
 
   public onSubmit(): void {
-    // this.router.routerState.snapshot
-
-    if (!this.loginGroup.valid) return;
+    if (this.loginGroup.invalid) return;
 
     this.auth
       .logIn({
@@ -42,12 +59,7 @@ export class LoginPageComponent implements OnInit {
         password: this.loginGroup.value.password as string,
       })
       .subscribe((data) => {
-        // this.router.navigate(['/']);
-        console.log(data);
+        this.router.navigate(['/']);
       });
-  }
-
-  ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('id'));
   }
 }

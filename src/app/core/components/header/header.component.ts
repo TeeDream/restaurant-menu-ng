@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   isAuth$!: Observable<boolean>;
+  isAdmin$!: Observable<boolean>;
 
   constructor(private auth: AuthService) {}
 
@@ -18,5 +19,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuth$ = this.auth.getLogInStatus$();
+    this.isAdmin$ = this.auth.isAdmin$.asObservable();
   }
 }

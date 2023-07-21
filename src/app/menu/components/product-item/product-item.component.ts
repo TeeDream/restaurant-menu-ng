@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ProductInterface } from 'src/app/core/types/product.interface';
+import { CategoryInterface } from '@src/app/core/types';
 
 @Component({
   selector: 'app-product-item',
@@ -11,4 +12,5 @@ export class ProductItemComponent {
   @Input() isAuth!: boolean | null;
   @Input() isAdmin!: boolean;
   @Input() isEditing!: boolean;
+  @Input() categories!: CategoryInterface[];
 }
