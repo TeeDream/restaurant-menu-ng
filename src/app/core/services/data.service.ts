@@ -12,6 +12,7 @@ export class DataService implements OnDestroy {
   private readonly PRODUCTS = 'products';
   private readonly CATEGORIES = 'categories';
   public renewProducts$ = new Subject<void>();
+  public renewCategories$ = new Subject<void>();
 
   constructor(private http: HttpClient) {}
 

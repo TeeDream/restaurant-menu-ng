@@ -15,7 +15,6 @@ import { CategoryInterface } from '@src/app/core/types';
 export class MenuPageComponent implements OnInit, OnDestroy {
   public products$!: Observable<ProductInterface[]>;
   public categories!: CategoryInterface[];
-  public categories$!: Observable<CategoryInterface[]>;
   public isAuth$!: Observable<boolean>;
   public isAdmin!: boolean;
   public isEditing = false;
@@ -45,23 +44,32 @@ export class MenuPageComponent implements OnInit, OnDestroy {
     this.products$ = this.dataService.getFilteredProducts(this.menuFilters);
   }
 
-  private setStreamCategories(): void {
-    this.categories$ = this.dataService.getCategories();
-    this.categories$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+  public setCategories(): void {
+    this.dataService.getCategories().subscribe((data) => {
       this.categories = data;
     });
   }
 
-  private setRenew(): void {
+  private setUpdateProductsSub(): void {
     this.dataService.renewProducts$
       .asObservable()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => this.getProducts());
   }
 
+  private setUpdateCategoriesSub(): void {
+    this.dataService.renewCategories$
+      .asObservable()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.setCategories();
+      });
+  }
+
   public ngOnInit(): void {
-    this.setRenew();
-    this.setStreamCategories();
+    this.setCategories();
+    this.setUpdateProductsSub();
+    this.setUpdateCategoriesSub();
     this.isAuth$ = this.auth.getLogInStatus$();
     this.isAdmin = this.auth.isAdmin;
     this.isEditing = this.route.routeConfig?.path === 'menu/edit';

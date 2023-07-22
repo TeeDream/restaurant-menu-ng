@@ -1,13 +1,40 @@
 <ng-container *ngIf="categories">
   <section class="filter-section" [formGroup]="formCategories">
     <h2>Select categories:</h2>
+    <ng-container *ngIf="isAdmin && isEdit">
+      <div class="edit-wrapper">
+        <app-create-category-btn></app-create-category-btn>
+
+        <ng-container *ngIf="isEditing; else edit">
+          <button mat-icon-button color="primary" (click)="toggleEditing()">
+            <mat-icon>done</mat-icon>
+          </button>
+        </ng-container>
+
+        <ng-template #edit>
+          <button mat-icon-button color="primary" (click)="toggleEditing()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-template>
+      </div>
+    </ng-container>
+
     <p *ngFor="let category of categories">
-      <mat-checkbox [formControlName]="category.id">{{
-        sanitizeCategory(category.name) | uppercase
-        }}</mat-checkbox>
+      <mat-checkbox [formControlName]="category.id"
+      >{{ sanitizeCategory(category.name) | uppercase }}
+      </mat-checkbox>
+      <span *ngIf="isEditing" class="edit-span">
+        <app-modify-category-btn [category]="category"></app-modify-category-btn>
+        <app-delete-category-btn [category]="category"></app-delete-category-btn>
+      </span>
     </p>
+
     <div class="clear-filters">
-      <button mat-raised-button class="clear-filters__btn" (click)="clearCategories()">
+      <button
+        mat-raised-button
+        class="clear-filters__btn"
+        (click)="clearCategories()"
+      >
         Clear Categories
       </button>
     </div>

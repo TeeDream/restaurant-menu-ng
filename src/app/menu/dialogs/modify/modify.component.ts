@@ -48,6 +48,7 @@ export class ModifyComponent {
       })
       .subscribe(() => {
         this.dataService.renewProducts$.next();
+        this.dialogRef.close(this.modifyProductGroup.value);
       });
   }
 }

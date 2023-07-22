@@ -1,0 +1,20 @@
+<form class="create-category-form">
+  <h1 mat-dialog-title>Create category</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="categoryName" />
+      <mat-error *ngIf="categoryName.hasError('required')"
+      >Name field is required.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close color="primary" (click)="onNoClick()">
+      No Thanks
+    </button>
+    <button mat-button type="submit" color="primary" (click)="onCreateClick()">
+      Create Category
+    </button>
+  </div>
+</form>

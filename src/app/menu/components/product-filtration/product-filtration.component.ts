@@ -9,6 +9,8 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, map, Observable, Subject, takeUntil } from 'rxjs';
 import { CategoryInterface } from '@src/app/core/types';
+import { DataService } from '@src/app/core/services/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-filtration',
@@ -16,14 +18,21 @@ import { CategoryInterface } from '@src/app/core/types';
   styleUrls: ['./product-filtration.component.scss'],
 })
 export class ProductFiltrationComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  @Input() isAdmin!: boolean;
+  @Output() productFilters = new EventEmitter<string[]>();
+  public categories$!: Observable<CategoryInterface[]>;
   public categories!: CategoryInterface[];
   public formCategories!: FormGroup;
+  public isEditing = false;
+  private destroy$ = new Subject<void>();
+  private updateDestroy$ = new Subject<void>();
+  public isEdit = false;
 
-  constructor(private fb: FormBuilder) {}
-
-  @Output() productFilters = new EventEmitter<string[]>();
-  @Input() categories$!: Observable<CategoryInterface[]>;
+  constructor(
+    private fb: FormBuilder,
+    private dataService: DataService,
+    private route: ActivatedRoute
+  ) {}
 
   protected createFormCategory() {
     return this.categories.reduce(
@@ -45,8 +54,23 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
     this.formCategories.reset();
   }
 
-  public ngOnInit(): void {
-    this.categories$.pipe(takeUntil(this.destroy$)).subscribe((categories) => {
+  public toggleEditing(): void {
+    this.isEditing = !this.isEditing;
+  }
+
+  private setUpdateSub(): void {
+    this.dataService.renewCategories$
+      .asObservable()
+      .pipe(takeUntil(this.updateDestroy$))
+      .subscribe(() => {
+        this.categories$ = this.dataService.getCategories();
+        this.destroy$.next();
+        this.subToForm();
+      });
+  }
+
+  private subToForm(): void {
+    this.categories$.subscribe((categories) => {
       this.categories = categories;
       this.formCategories = this.fb.group(this.createFormCategory());
       this.formCategories.valueChanges
@@ -63,8 +87,18 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
     });
   }
 
+  public ngOnInit(): void {
+    this.isEdit = this.route.routeConfig?.path === 'menu/edit';
+
+    this.categories$ = this.dataService.getCategories();
+    this.subToForm();
+    this.setUpdateSub();
+  }
+
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.updateDestroy$.next();
+    this.updateDestroy$.complete();
   }
 }
