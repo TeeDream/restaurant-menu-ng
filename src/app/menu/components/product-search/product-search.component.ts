@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-search',
@@ -18,6 +19,8 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();
   searchInput = new FormControl('');
 
+  constructor(private route: ActivatedRoute) {}
+
   public clearInputValue(): void {
     this.searchInput.setValue('');
   }
@@ -27,6 +30,16 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
       .pipe(debounceTime(300), takeUntil(this.destroy$))
       .subscribe((str) => {
         if (str !== null) this.filter.emit(str);
+      });
+
+    this.route.queryParamMap
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params) => {
+        const query = params.get('query');
+
+        if (!query) return;
+
+        this.searchInput.patchValue(query);
       });
   }
 

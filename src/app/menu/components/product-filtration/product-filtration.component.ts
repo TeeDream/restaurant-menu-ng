@@ -20,13 +20,14 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductFiltrationComponent implements OnInit, OnDestroy {
   @Input() isAdmin!: boolean;
   @Output() productFilters = new EventEmitter<string[]>();
+
   public categories$!: Observable<CategoryInterface[]>;
   public categories!: CategoryInterface[];
   public formCategories!: FormGroup;
   public isEditing = false;
+  public isEdit = false;
   private destroy$ = new Subject<void>();
   private updateDestroy$ = new Subject<void>();
-  public isEdit = false;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,7 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {}
 
-  protected createFormCategory() {
+  private createFormCategory() {
     return this.categories.reduce(
       (acc, category) => {
         acc[category.id.toString()] = false;
@@ -84,12 +85,26 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
           takeUntil(this.destroy$)
         )
         .subscribe((data) => this.productFilters.emit(data));
+
+      this.route.queryParamMap
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((params) => {
+          const paramsArr = params.getAll('category');
+
+          if (!paramsArr.length) return;
+          const paramsObject = paramsArr.reduce((acc, param) => {
+            acc[param] = true;
+
+            return acc;
+          }, {} as { [key: string]: boolean });
+
+          this.formCategories.patchValue(paramsObject);
+        });
     });
   }
 
   public ngOnInit(): void {
     this.isEdit = this.route.routeConfig?.path === 'menu/edit';
-
     this.categories$ = this.dataService.getCategories();
     this.subToForm();
     this.setUpdateSub();
