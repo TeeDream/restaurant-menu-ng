@@ -19,6 +19,10 @@ import { DeleteCategoryBtnComponent } from './dialogs/delete-category-btn/delete
 import { DeleteCategoryDialogComponent } from './dialogs/delete-category-dialog/delete-category-dialog.component';
 import { ModifyCategoryBtnComponent } from './dialogs/modify-category-btn/modify-category-btn.component';
 import { ModifyCategoryDialogComponent } from './dialogs/modify-category-dialog/modify-category-dialog.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from '@src/app/menu/store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { MenuEffects } from '@src/app/menu/store/effects';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,13 @@ import { ModifyCategoryDialogComponent } from './dialogs/modify-category-dialog/
     ModifyCategoryBtnComponent,
     ModifyCategoryDialogComponent,
   ],
-  imports: [CommonModule, SharedModule, MaterialModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    MaterialModule,
+    StoreModule.forFeature('menu', reducers),
+    EffectsModule.forFeature([MenuEffects]),
+  ],
   exports: [ProductItemComponent, ProductFiltrationComponent],
 })
 export class MenuModule {}

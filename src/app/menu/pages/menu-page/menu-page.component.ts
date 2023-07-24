@@ -6,6 +6,12 @@ import { MenuFilters } from '@src/app/menu/types/menu.filters';
 import { AuthService } from '@src/app/auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryInterface } from '@src/app/core/types';
+import { Store } from '@ngrx/store';
+import * as MenuActions from '../../store/actions';
+import {
+  selectCategories,
+  selectIsLoading,
+} from '@src/app/menu/store/selectors';
 
 @Component({
   selector: 'app-menu-page',
@@ -19,7 +25,10 @@ export class MenuPageComponent implements OnInit, OnDestroy {
   public isAdmin!: boolean;
   public isEditing = false;
   private destroy$ = new Subject<void>();
-  private menuFilters: MenuFilters = {
+  // public isLoading$!: Observable<boolean>;
+  public isLoading$ = this.store.select(selectIsLoading);
+  public storeCategories$ = this.store.select(selectCategories);
+  public menuFilters: MenuFilters = {
     filters: [],
     query: '',
   };
@@ -28,8 +37,12 @@ export class MenuPageComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
+    private router: Router,
+    // private store: Store<AppStateInterface>
+    private store: Store
+  ) {
+    // this.isLoading$ = this.store.pipe(select(selectIsLoading));
+  }
 
   public menuCategoriesHandler(arr: string[]): void {
     this.menuFilters.filters = arr;
@@ -104,6 +117,9 @@ export class MenuPageComponent implements OnInit, OnDestroy {
     this.isAuth$ = this.auth.getLogInStatus$();
     this.isAdmin = this.auth.isAdmin;
     this.isEditing = this.route.routeConfig?.path === 'menu/edit';
+
+    this.store.dispatch(MenuActions.getCategories());
+    this.store.dispatch(MenuActions.getProducts(this.menuFilters));
   }
 
   public ngOnDestroy(): void {
