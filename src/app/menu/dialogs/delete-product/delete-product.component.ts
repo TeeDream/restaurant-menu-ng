@@ -25,8 +25,6 @@ export class DeleteProductComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
-
-      console.log('you have deleted', result?.product);
     });
   }
 }

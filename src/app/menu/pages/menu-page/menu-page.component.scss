@@ -29,6 +29,13 @@
       }
     }
 
+    .category-title {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-family: "Roboto Serif", serif;
+    }
+
     app-create-product-btn {
       display: flex;
       justify-content: center;
@@ -37,12 +44,13 @@
 
     .product-wrapper {
       width: 100%;
+      max-width: 1600px;
+      margin: 0 auto 1rem;
       padding: 0 10px;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-auto-columns: auto;
       grid-gap: 1rem;
-      margin-bottom: 1rem;
     }
   }
 }

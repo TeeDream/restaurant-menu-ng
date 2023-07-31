@@ -1,10 +1,11 @@
 import { CategoryInterface } from '@src/app/core/types/categoryInterface';
 
 export interface ProductInterface {
-  id: number;
+  id: string;
   price: number;
   name: string;
   description?: string;
-  categoryId: number;
+  categoryId: string;
+  hot?: boolean;
   category: CategoryInterface;
 }

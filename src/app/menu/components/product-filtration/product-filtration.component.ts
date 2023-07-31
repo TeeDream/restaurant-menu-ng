@@ -11,6 +11,9 @@ import { debounceTime, map, Observable, Subject, takeUntil } from 'rxjs';
 import { CategoryInterface } from '@src/app/core/types';
 import { DataService } from '@src/app/core/services/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { selectCategories } from '@src/app/menu/store/selectors';
+import { Store } from '@ngrx/store';
+import * as MenuActions from '@src/app/menu/store/actions';
 
 @Component({
   selector: 'app-product-filtration',
@@ -21,8 +24,8 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
   @Input() isAdmin!: boolean;
   @Output() productFilters = new EventEmitter<string[]>();
 
-  public categories$!: Observable<CategoryInterface[]>;
-  public categories!: CategoryInterface[];
+  public storeCategories$: Observable<CategoryInterface[]> =
+    this.store.select(selectCategories);
   public formCategories!: FormGroup;
   public isEditing = false;
   public isEdit = false;
@@ -32,11 +35,12 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) {}
 
-  private createFormCategory() {
-    return this.categories.reduce(
+  private createFormCategory(categories: CategoryInterface[]) {
+    return categories.reduce(
       (acc, category) => {
         acc[category.id.toString()] = false;
         return acc;
@@ -45,10 +49,6 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
         [key: string]: boolean;
       }
     );
-  }
-
-  public sanitizeCategory(category: string): string {
-    return category.replaceAll(/[_-]/g, ' ');
   }
 
   public clearCategories(): void {
@@ -64,27 +64,16 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
       .asObservable()
       .pipe(takeUntil(this.updateDestroy$))
       .subscribe(() => {
-        this.categories$ = this.dataService.getCategories();
+        //???
+        this.store.dispatch(MenuActions.getCategories());
         this.destroy$.next();
         this.subToForm();
       });
   }
 
   private subToForm(): void {
-    this.categories$.subscribe((categories) => {
-      this.categories = categories;
-      this.formCategories = this.fb.group(this.createFormCategory());
-      this.formCategories.valueChanges
-        .pipe(
-          debounceTime(300),
-          map((category) =>
-            Object.entries(category)
-              .filter((category) => category[1])
-              .map((selectedCategory) => selectedCategory[0])
-          ),
-          takeUntil(this.destroy$)
-        )
-        .subscribe((data) => this.productFilters.emit(data));
+    this.storeCategories$.subscribe((categories) => {
+      this.formCategories = this.fb.group(this.createFormCategory(categories));
 
       this.route.queryParamMap
         .pipe(takeUntil(this.destroy$))
@@ -100,12 +89,23 @@ export class ProductFiltrationComponent implements OnInit, OnDestroy {
 
           this.formCategories.patchValue(paramsObject);
         });
+
+      this.formCategories.valueChanges
+        .pipe(
+          debounceTime(300),
+          map((category) =>
+            Object.entries(category)
+              .filter((category) => category[1])
+              .map((selectedCategory) => selectedCategory[0])
+          ),
+          takeUntil(this.destroy$)
+        )
+        .subscribe((data) => this.productFilters.emit(data));
     });
   }
 
   public ngOnInit(): void {
     this.isEdit = this.route.routeConfig?.path === 'menu/edit';
-    this.categories$ = this.dataService.getCategories();
     this.subToForm();
     this.setUpdateSub();
   }

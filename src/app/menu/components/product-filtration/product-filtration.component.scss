@@ -9,8 +9,16 @@
     margin-bottom: 20px;
   }
 
+  .category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .edit-span {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   h2 {

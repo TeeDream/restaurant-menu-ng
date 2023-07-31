@@ -5,15 +5,8 @@
       [isAdmin]="isAdmin"
     ></app-product-filtration>
   </mat-drawer>
+
   <div class="sidenav-content">
-    <div *ngIf="isLoading$ | async">Loading...</div>
-    <ng-container *ngIf="storeCategories$ | async as categories">
-      <div *ngFor="let category of categories">
-        {{category | json}}
-      </div>
-    </ng-container>
-
-
     <div class="search-filter-wrapper">
       <div class="spacer"></div>
       <div class="search-filter">
@@ -26,15 +19,43 @@
       </div>
       <div class="spacer"></div>
     </div>
-    <ng-container *ngIf="isAdmin && isEditing">
-      <app-create-product-btn
-        [categories]="categories"
-      ></app-create-product-btn>
+
+    <ng-container *ngIf="storeCategories$ | async as storeCategories">
+      <ng-container *ngIf="isAdmin && isEditing">
+        <app-create-product-btn
+          [categories]="storeCategories"
+        ></app-create-product-btn>
+      </ng-container>
     </ng-container>
-    <ng-container *ngIf="products$ | async as products">
-      <ng-container *ngFor="let category of categories">
-        <ng-container *ngIf="menuFilters.filters.includes(category.id.toString())">
-          <div>Category: {{ category.name | uppercase }}</div>
+
+    <ng-container *ngIf="storeProducts$ | async as products">
+      <ng-container *ngIf="storeHotProducts$ | async as hotProducts">
+        <ng-container *ngIf="storeCategories$ | async as storeCategories">
+          <ng-container *ngIf="isFiltersEmpty$ | async">
+            <div class="category-title">Category: Hot</div>
+
+            <div class="product-wrapper">
+              <app-product-item
+                *ngFor="let product of hotProducts"
+                [product]="product"
+                [isAuth]="isAuth$ | async"
+                [isAdmin]="isAdmin"
+                [isEditing]="isEditing"
+                [categories]="storeCategories"
+              ></app-product-item>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <ng-container
+        *ngFor="let category of storeCategories$ | async as storeCategories"
+      >
+        <ng-container *ngIf="isAnyProductsWithinCategory(category, products)">
+          <div class="category-title">
+            Category: {{ category.name | uppercase }}
+          </div>
+
           <div class="product-wrapper">
             <ng-container *ngFor="let product of products">
               <app-product-item
@@ -43,7 +64,7 @@
                 [isAuth]="isAuth$ | async"
                 [isAdmin]="isAdmin"
                 [isEditing]="isEditing"
-                [categories]="categories"
+                [categories]="storeCategories"
               >
               </app-product-item>
             </ng-container>

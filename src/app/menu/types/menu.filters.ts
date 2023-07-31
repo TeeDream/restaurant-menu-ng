@@ -1,4 +1,4 @@
 export interface MenuFilters {
   filters: string[];
-  query: string;
+  queryString: string;
 }

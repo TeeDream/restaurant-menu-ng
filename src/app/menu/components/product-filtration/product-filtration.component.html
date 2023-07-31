@@ -1,4 +1,4 @@
-<ng-container *ngIf="categories">
+<ng-container *ngIf="storeCategories$ | async as storeCategories">
   <section class="filter-section" [formGroup]="formCategories">
     <h2>Select categories:</h2>
     <ng-container *ngIf="isAdmin && isEdit">
@@ -19,14 +19,18 @@
       </div>
     </ng-container>
 
-    <p *ngFor="let category of categories">
-      <mat-checkbox [formControlName]="category.id"
-      >{{ sanitizeCategory(category.name) | uppercase }}
+    <p class="category" *ngFor="let category of storeCategories">
+      <mat-checkbox [formControlName]="category.id">
+        {{ category.name | uppercase }}
       </mat-checkbox>
       <span *ngIf="isEditing" class="edit-span">
-        <app-modify-category-btn [category]="category"></app-modify-category-btn>
-        <app-delete-category-btn [category]="category"></app-delete-category-btn>
-      </span>
+          <app-modify-category-btn
+            [category]="category"
+          ></app-modify-category-btn>
+          <app-delete-category-btn
+            [category]="category"
+          ></app-delete-category-btn>
+        </span>
     </p>
 
     <div class="clear-filters">

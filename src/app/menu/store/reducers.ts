@@ -5,10 +5,13 @@ import * as MenuActions from './actions';
 export const initialState: MenuStateInterface = {
   isLoadingCategories: false,
   isLoadingProducts: false,
+  isLoadingHotProducts: false,
   categories: [],
   products: [],
+  hotProducts: [],
   errorCategories: null,
   errorProducts: null,
+  errorHotProducts: null,
 };
 
 export const reducers = createReducer(
@@ -54,6 +57,29 @@ export const reducers = createReducer(
       ...state,
       isLoadingProducts: false,
       products: action.products,
+    })
+  ),
+  on(
+    MenuActions.getHotProducts,
+    (state): MenuStateInterface => ({
+      ...state,
+      isLoadingHotProducts: true,
+    })
+  ),
+  on(
+    MenuActions.getHotProductsSuccess,
+    (state, action): MenuStateInterface => ({
+      ...state,
+      isLoadingHotProducts: false,
+      hotProducts: action.hotProducts,
+    })
+  ),
+  on(
+    MenuActions.getHotProductsFailure,
+    (state, action): MenuStateInterface => ({
+      ...state,
+      isLoadingHotProducts: false,
+      errorHotProducts: action.error,
     })
   )
 );

@@ -12,7 +12,8 @@
       "price": 98,
       "name": "Oatmeal with Caramelized Pear and Walnut 300 g",
       "description": "prepared with milk or water",
-      "categoryId": 1
+      "categoryId": 1,
+      "hot": true
     },
     {
       "id": 3,
@@ -69,7 +70,8 @@
       "id": 11,
       "price": 115,
       "name": "Chicken Roll",
-      "categoryId": 3
+      "categoryId": 3,
+      "hot": true
     },
     {
       "id": 12,
@@ -95,7 +97,8 @@
       "price": 295,
       "name": "Beer Plate 310 g",
       "description": "basturma, lavash fries, smoked cheese, chicken strips (spicy), fried hearts. Garlic sauce",
-      "categoryId": 3
+      "categoryId": 3,
+      "hot": true
     },
     {
       "id": 16,
@@ -137,7 +140,8 @@
       "id": 22,
       "price": 163,
       "name": "Vegetable Wreath with Feta Cheese and Sour Cream 300 g",
-      "categoryId": 5
+      "categoryId": 5,
+      "hot": true
     },
     {
       "id": 23,
@@ -168,7 +172,8 @@
       "id": 27,
       "price": 196,
       "name": "Turkey Salad with Cashews and Blue Cheese 180 g",
-      "categoryId": 5
+      "categoryId": 5,
+      "hot": true
     },
     {
       "id": 28,
@@ -192,7 +197,8 @@
       "id": 31,
       "price": 110,
       "name": "Okroshka with Ayran 300 g",
-      "categoryId": 6
+      "categoryId": 6,
+      "hot": true
     },
     {
       "id": 32,
@@ -228,7 +234,8 @@
       "id": 37,
       "price": 118,
       "name": "Chicken Broth with Homemade Noodles 300 g",
-      "categoryId": 6
+      "categoryId": 6,
+      "hot": true
     },
     {
       "id": 38,
@@ -288,7 +295,8 @@
       "id": 47,
       "price": 368,
       "name": "Duck Leg with Drunken Pear 260 g",
-      "categoryId": 10
+      "categoryId": 10,
+      "hot": true
     },
     {
       "id": 48,
@@ -319,7 +327,8 @@
       "id": 52,
       "price": 236,
       "name": "Chicken Kiev Cutlet 150/85 g",
-      "categoryId": 10
+      "categoryId": 10,
+      "hot": true
     },
     {
       "id": 53,
@@ -343,7 +352,8 @@
       "id": 56,
       "price": 468,
       "name": "Sea Bass Fillet with Vegetables 120/150 g",
-      "categoryId": 11
+      "categoryId": 11,
+      "hot": true
     },
     {
       "id": 57,
@@ -379,13 +389,15 @@
       "id": 62,
       "price": 65,
       "name": "French Fries 150 g",
-      "categoryId": 12
+      "categoryId": 12,
+      "hot": true
     },
     {
       "id": 63,
       "price": 55,
       "name": "Country-Style Potatoes 150 g",
-      "categoryId": 12
+      "categoryId": 12,
+      "hot": true
     },
     {
       "id": 64,
@@ -445,7 +457,8 @@
       "id": 73,
       "price": 119,
       "name": "Chicken Shashlik",
-      "categoryId": 14
+      "categoryId": 14,
+      "hot": true
     },
     {
       "id": 74,
@@ -530,14 +543,16 @@
       "price": 98,
       "name": "Napoleon Cake",
       "description": "price per 100 g",
-      "categoryId": 18
+      "categoryId": 18,
+      "hot": true
     },
     {
       "id": 88,
       "price": 106,
       "name": "Medovik Cake",
       "description": "price per 100 g",
-      "categoryId": 18
+      "categoryId": 18,
+      "hot": true
     },
     {
       "id": 89,
@@ -550,6 +565,13 @@
       "price": 135,
       "name": "Cottage Cheese Pancakes with Sour Cream 150/50 g",
       "categoryId": 18
+    },
+    {
+      "price": 100,
+      "name": "yogurt",
+      "description": "Tasty yogurt",
+      "categoryId": "gzYV6lRQxpxjYqWaLmXy",
+      "id": 91
     }
   ],
   "categories": [

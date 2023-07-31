@@ -14,7 +14,7 @@ export const getProducts = createAction(
   '[Menu] Get Products',
   props<{
     filters: string[];
-    query: string;
+    queryString: string;
   }>()
 );
 export const getProductsFailure = createAction(
@@ -24,4 +24,18 @@ export const getProductsFailure = createAction(
 export const getProductsSuccess = createAction(
   '[Menu] Get Products success',
   props<{ products: ProductInterface[] }>()
+);
+
+export const getHotProducts = createAction('[Menu] Get Hot Products');
+export const getHotProductsSuccess = createAction(
+  '[Menu] Get Hot Products success',
+  props<{
+    hotProducts: ProductInterface[];
+  }>()
+);
+export const getHotProductsFailure = createAction(
+  '[Menu] Get Hot Products failure',
+  props<{
+    error: string;
+  }>()
 );

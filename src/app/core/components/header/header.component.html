@@ -24,6 +24,10 @@
         <mat-icon>restaurant_menu</mat-icon>
         <span>Menu</span>
       </a>
+      <a routerLink="/about" mat-menu-item>
+        <mat-icon>info</mat-icon>
+        <span>About</span>
+      </a>
       <ng-container *ngIf="isAdmin$ | async">
         <a routerLink="/menu/edit" mat-menu-item>
           <mat-icon>edit</mat-icon>

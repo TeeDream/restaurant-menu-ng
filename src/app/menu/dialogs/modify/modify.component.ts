@@ -44,7 +44,7 @@ export class ModifyComponent {
         price: controls.price.value as number,
         name: controls.name.value as string,
         description: controls.description.value as string,
-        categoryId: controls.category.value as number,
+        categoryId: controls.category.value as string,
       })
       .subscribe(() => {
         this.dataService.renewProducts$.next();

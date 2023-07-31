@@ -40,7 +40,7 @@ export class CreateProductDialogComponent {
         price: controls.price.value as number,
         name: controls.name.value as string,
         description: controls.description.value as string,
-        categoryId: Number(controls.category.value),
+        categoryId: controls.category.value as string,
       })
       .subscribe(() => {
         this.onNoClick();

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@src/app/auth/services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   AbstractControlOptions,
   FormControl,
@@ -14,7 +14,7 @@ import { MustMatch } from '@src/app/auth/pages/register-page/must-match';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent {
   hide = true;
   hideConfirm = true;
   loginGroup = new FormGroup(
@@ -33,11 +33,7 @@ export class RegisterPageComponent implements OnInit {
     } as AbstractControlOptions
   );
 
-  constructor(
-    private auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   getErrorMessage(field: 'email' | 'password' | 'confirmPassword'): string {
     const controls = this.loginGroup.controls;
@@ -84,9 +80,5 @@ export class RegisterPageComponent implements OnInit {
       .subscribe((data) => {
         this.router.navigate(['/login']);
       });
-  }
-
-  ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('id'));
   }
 }

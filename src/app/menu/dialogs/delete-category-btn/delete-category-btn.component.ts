@@ -25,8 +25,6 @@ export class DeleteCategoryBtnComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
-
-      console.log('you have deleted', result);
     });
   }
 }
